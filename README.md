@@ -1,2 +1,2 @@
 # Project-2
-STEP 1 – INSTALLING THE NGINX WEB SERVER
+Project2
