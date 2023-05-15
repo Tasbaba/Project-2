@@ -50,9 +50,10 @@
 ### Now is the time to test if my Nginx server can respond to requests from the Internet. 
 ### I will have to open any web browser from my system and try to access it using the below url, by adding my EC2 instace public IP
 
-http://<Public-IP-Address>:80
-
 **`http://<Public-IP-Address>:80`** 
+
+![Nginx confirmation from localhost](./images/Nginx-confirmation.jpg)
+
 
 
 
