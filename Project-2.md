@@ -105,18 +105,101 @@
 
 ![mkdir for projectLEMP](./images/mkdir%20for%20projectLEMP.jpg)
 
-### Once I have created the domain (/var/www/projectLEMP/), The next acrion is to assign ownership to the directory with the $USER environment variable, which will reference my current system user by using the below command.
+### Once I have created the domain (/var/www/projectLEMP/), The next action is to assign ownership to the directory with the $USER environment variable, which will reference my current system user by using the below command.
 
 **`sudo chown -R $USER:$USER /var/www/projectLEMP`**
 
 ![assign user to the domain](./images/assign%20user%20to%20the%20domain.jpg)
 
-### After the user is created, I will open a new configuration file in Nginx’s sites-available directory using nano command-line editor by using the below command line, and this create a new blank file, and I paste in the following bare-bones configuration as shown below.
+### After the user is created, I open a new configuration file in Nginx’s sites-available directory using nano command-line editor by using the below command line, and this create a new blank file, and I paste in the following bare-bones configuration as shown below.
 
 **`sudo nano /etc/nginx/sites-available/projectLEMP`**
 
 ### **bare-bones configuration**
-![bare bones confirations](./images/bare%20bones%20config.jpg)
+![bare bones configurations](./images/bare%20bones%20config.jpg)
+
+### After I have review bare bones I copiee and pasted in the nano editor, I save it and close the file via CTRL+X, CTRL+Y, and ENTER to confirm.
+
+### **- Activate Configuration**
+### I then activate the configuration via linking the configed file from Nginx sites-enabled directory by using the below command.
+
+**`sudo ln -s /etc/nginx/sites-available/projectLEMP /etc/nginx/sites-enabled/`**
+
+![Activate Config](./images/activate%20configuration.jpg)
+
+### By activating the configuration, it tell's Nginx to use the configuration the next time it is reloaded, and I tested my configuration for syntax errors through the below command.
+
+**`sudo nginx -t`**
+
+![Check for syntax error](./images/syntax%20error%20test.jpg)
+
+### Since check for syntax error is confirmed okay, i need to disable the default Nginx host currently configured to listen on port 80 by running the below command.
+
+**`sudo unlink /etc/nginx/sites-enabled/default`**
+
+![Un-link default enable sites](./images/Un-link%20default%20using%20port%2080.jpg)
+
+### After I disable the default Nginx host listening on port 80, I reloadde Nginx to apply the changes by using the below command.
+
+**`sudo systemctl reload nginx`**
+
+![reload to apply changes](./images/reload%20to%20apply%20changes.jpg)
+
+### My new website is active, but the web root /var/www/projectLEMP is empty, and I will create an index.html file in that location so that I can test the new server block is working as expected.
+
+### The below command is used with my public intance V4 IP address.
+
+**`sudo echo 'Hello LEMP from hostname' $(curl -s http://169.254.169.254/latest/meta-data/public-hostname) 'with public IP' $(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) > /var/www/projectLEMP/index.html`**
+
+![create index](./images/create%20index.jpg)
+
+### The Index is created as shown above, and I will lunch my browser and try to open my website URL using the public IP address. as shown below.
+
+**`http://<Public-IP-Address>:80`**
+
+![open website](./images/open%20website.jpg)
+
+## **
+
+### In other to test and validate that Nginx can correctly hand .php files off to PHP processor.
+
+### I created a test PHP file in my document root, and open a new file called info.php within the document root in the text editor.
+### I use the below command to access the nano editor.
+
+**`sudo nano /var/www/projectLEMP/info.php`**
+
+### I pasted the below syntax lines into the new nano file, as it will return information about my server.
+
+**`<?php`**
+
+**`phpinfo();`**
+
+### I can now use the web browser by visiting the domain name or public IP address I set up in my Nginx configuration file, followed by /info.php as shown below, and I will see a web page containing detailed information about my server.
+
+**`http://`server_domain_or_IP`/info.php`**
+
+![php detail info](./images/detail%20information%20about%20php.jpg)
+
+### After confirm all the relevant information about my PHP server through the above page, it is best to remove the file I created as it contains sensitive information about MY PHP environment and the Ubuntu server by running the remove (rm) command to remove that file as shown below.
+
+**`sudo rm /var/www/your_domain/info.ph`**
+
+### **Retrieving data from MySQL database with PHP**
+
+### At this stage I will create a test database (DB) with simple “To do list” and configure access to it, so the Nginx website would be able to query data from the DB and display it.
+
+### I will create a database called example_database and a user named example_user.
+
+### Firstly, I will connect to MYSQL console via the the command line below
+
+
+
+
+
+
+
+
+
 
 
 
